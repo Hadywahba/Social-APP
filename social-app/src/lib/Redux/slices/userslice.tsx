@@ -1,4 +1,4 @@
-import { User } from "@/lib/interfaces/postInter";
+import  type { User } from "@/lib/interfaces/postInter";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
 import Cookies from 'js-cookie' 

@@ -2,7 +2,7 @@
 import { Alert, Box, Button, CircularProgress, Container, Paper, TextField, Typography,} from "@mui/material";
 import axios from "axios";
 import CheckIcon from '@mui/icons-material/Check';
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 // import { useForm } from "react-hook-form"
  import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -18,15 +18,15 @@ import { userdata } from "@/lib/Redux/slices/userslice";
   
 }
 
-export default function login() {
+export default function Login() {
 const[message , setMessage]=useState<string|null>(null)
 const[CallApi , setCallApi]=useState<boolean>(false)
 const[error , setError]=useState<boolean|null>(null)
-  const{register , handleSubmit}=useForm()
+  const{register , handleSubmit}=useForm<Logininputvalues>()
     const dispatch = useDispatch<storeDispatch>();
   const router = useRouter()
 
-
+console.log(error)
   const Loginform=async(values:Logininputvalues)=>{
 try {
   const{data}=await axios.post('https://linked-posts.routemisr.com/users/signin',values)
@@ -48,12 +48,23 @@ try {
 }
 
 
-catch (error:any) {
-  console.log(error)
-    setCallApi(false)
-  setMessage(error.response.data.error)
-setError(true)
-  return error
+catch (error: unknown) {
+    if (error instanceof Error && 'response' in error){
+       const err = error as { response: { data: { error: string } } };
+       console.log(err);
+    setCallApi(false);
+    setMessage(err.response.data.error);
+    setError(true);
+    return err;
+    }else{
+      console.log("Unexpected error:", error);
+    setCallApi(false);
+    setMessage("An unexpected error occurred.");
+    setError(true);
+    return error;
+    }
+  
+
 }
   }
  

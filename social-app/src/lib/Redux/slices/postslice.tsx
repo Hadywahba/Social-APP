@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 export type PostsType={
 posts: Post[] ,
 isloading : boolean ,
-singlePost : null | Post[] 
+singlePost : null | Post
 content:null | Comment[] 
 post:string
 }
@@ -108,5 +108,5 @@ extraReducers:(builder)=>{
 }
 })
 
-const Post = postslice.reducer
-export default Post
+const PostSl = postslice.reducer
+export default PostSl

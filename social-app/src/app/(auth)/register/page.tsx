@@ -25,8 +25,8 @@ interface Registerinputvalues {
   dateOfBirth: number;
   gender: string;
 }
-export default function register() {
-  const { register, handleSubmit } = useForm({ mode: "all" });
+export default function Register() {
+  const { register, handleSubmit } = useForm<Registerinputvalues>({ mode: "all" });
   const[messageReg , setmessageReg]=useState<string|null>(null)
   const[errorReg , seterrorReg]=useState<boolean|null>(null)
  const[RegisterApi , setRegisterApi]=useState<boolean>(false)
@@ -45,14 +45,24 @@ export default function register() {
   router.push("/login")
  },1000)
       return data;
-    } catch (error:any) {
-      console.log(error);
-       setRegisterApi(false)
-         setmessageReg(error.response.data.error)
-        seterrorReg(true)
-      return error;
+    } catch (error: unknown) {
+      if (error && typeof error === "object" && "response" in error) {
+    const err = error as { response: { data: { error: string } } };
+    console.log(err);
+    setRegisterApi(false);
+    setmessageReg(err.response.data.error);
+    seterrorReg(true);
+    return err;
+  } else {
+    console.error("Unexpected error:", error);
+    setRegisterApi(false);
+    setmessageReg("An unexpected error occurred.");
+    seterrorReg(true);
+    return error;
+  }
     }
   };
+  console.log(errorReg)
   return (
     <Container
       maxWidth="lg"

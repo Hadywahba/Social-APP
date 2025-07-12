@@ -1,7 +1,7 @@
 "use client";
 import { Avatar, Stack, TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -11,23 +11,20 @@ import Cookies from "js-cookie";
 import { getAllPosts } from "@/lib/Redux/slices/postslice";
 import { useDispatch, useSelector } from "react-redux";
 import ButtonBase from "@mui/material/ButtonBase";
-import {userdata } from "@/lib/Redux/slices/userslice";
+import { userdata } from "@/lib/Redux/slices/userslice";
 import { storeDispatch, storeState } from "@/lib/Redux/store/store";
 export default function Createpost() {
   const [body, setbody] = useState("");
-  const [image, setimage] = useState(" ");
-  const [imgUrl, setimgUrl] = useState(null);
-  const [photo, setphoto] = useState("");
-  const[photoURL,setphotoURL]=useState(null)
+  const [image, setimage] = useState<File | null>(null);
+  const [imgUrl, setimgUrl] = useState<string | null>(null);
+
   const dispatch = useDispatch<storeDispatch>();
   const user = useSelector((state: storeState) => state.User.user);
 
   // AddUserPicture //
-  async function AddUserPicture(e:any) {
-    const files=e.target.files[0]
-    setphoto(files);
-    const phURL=URL.createObjectURL(e.target.files[0]);
-    setphotoURL(phURL)
+  async function AddUserPicture(e: React.ChangeEvent<HTMLInputElement>) {
+   const files = e.target.files?.[0];
+  if (!files) return;
     const form = new FormData();
     form.append("photo", files);
     try {
@@ -36,78 +33,75 @@ export default function Createpost() {
         form,
         {
           headers: {
-            token: Cookies.get("token") ,
+            token: Cookies.get("token"),
           },
         }
       );
 
-      console.log("uploaded",data);
+      console.log("uploaded", data);
 
       dispatch(userdata());
       dispatch(getAllPosts());
     } catch (error) {
-       console.log("photo error",error);
+      console.log("photo error", error);
       throw error;
     }
   }
 
   // AddUserPicture //
 
-
-
-
   //clearPost//
 
   function clearPost() {
     setbody(" ");
     setimgUrl(null);
-  setimage("");
+    setimage(null);
   }
-
+console.log("body:", body.trim());
+console.log("image:", image);
   //clearPost//
 
   //Add Post//
   async function addPost() {
-     if (!body && !image) {
-    alert("You must write a post or upload at least an image !!");
-    return;
-  }
+    if (!body && !image) {
+      alert("You must write a post or upload at least an image !!");
+      return;
+    }
     console.log(body);
     console.log(image);
     const form = new FormData();
-   if (body.trim() !== "") form.append("body", body);
-    if (image)form.append("image", image);
+    if (body.trim() !== "") form.append("body", body);
+    if (image) form.append("image", image);
 
-   try {
-     const { data } = await axios.post(
-      "https://linked-posts.routemisr.com/posts",
-      form,
-      {
-        headers: {
-          token: Cookies.get("token"),
-        },
-      }
-    );
-    console.log(data);
-    dispatch(getAllPosts());
-    clearPost();
-    return data;
-   } catch (error) {
-    console.log(error)
-    throw error
-   }
-    
-  }
-   //Add Post//
-
-
-    //addphoto//
-  function addphoto(e) {
-    console.log(e.target.files[0]);
-    setimage(e.target.files[0]);
-    const url = URL.createObjectURL(e.target.files[0]);
-    setimgUrl(url);
+    try {
+      const { data } = await axios.post(
+        "https://linked-posts.routemisr.com/posts",
+        form,
+        {
+          headers: {
+            token: Cookies.get("token"),
+          },
+        }
+      );
+      console.log(data);
       dispatch(getAllPosts());
+      clearPost();
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+  //Add Post//
+
+  //addphoto//
+  function addphoto(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+  if (!file) return;
+    setimage(file);
+    const url = URL.createObjectURL(file);
+    setimgUrl(url);
+    dispatch(getAllPosts());
   }
   //addphoto//
   const VisuallyHiddenInput = styled("input")({
@@ -151,13 +145,8 @@ export default function Createpost() {
           gap: "20px",
         }}
       >
-      
-        <Avatar
-        
-          sx={{ width: 80, height: 80 }}
-          src={user?.photo}
-        />
-        
+        <Avatar sx={{ width: 80, height: 80 }} src={user?.photo} />
+
         <input
           type="file"
           accept="image/*"
@@ -174,7 +163,9 @@ export default function Createpost() {
           }}
           onChange={(e) => AddUserPicture(e)}
         />
-          <Typography  variant="h6" color="initial">{user?.name}</Typography>
+        <Typography variant="h6" color="initial">
+          {user?.name}
+        </Typography>
       </ButtonBase>
 
       {/* //avatar */}
@@ -212,11 +203,7 @@ export default function Createpost() {
       </Button>
       {imgUrl && <img src={imgUrl} />}
 
-      <Button
-        variant="contained"
-       onClick={addPost}
-        endIcon={<SendIcon />}
-      >
+      <Button variant="contained" onClick={addPost} endIcon={<SendIcon />}>
         Add Post
       </Button>
     </Stack>

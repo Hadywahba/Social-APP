@@ -3,13 +3,11 @@ import * as React from "react";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
 import Card from "@mui/joy/Card";
-import FaceIcon from "@mui/icons-material/Face";
 import CardContent from "@mui/joy/CardContent";
 import Link from "@mui/joy/Link";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ModeCommentOutlined from "@mui/icons-material/ModeCommentOutlined";
 import SendOutlined from "@mui/icons-material/SendOutlined";
 import { Button, CardMedia, Input } from "@mui/material";
@@ -28,11 +26,14 @@ export default function Postcard({
   limitComment,
   favourites,
   handleTogle,
+  
 }: {
   post: Post;
   limitComment?: number;
   favourites: { id: string }[];
   handleTogle: (Post: Post) => void;
+   isfavourite?: boolean;
+    DelePost?: (post: Post) => Promise<void>;
 }) {
   const [comment, setcomment] = React.useState("");
   const [comm, setcomm] = React.useState(false);
@@ -45,11 +46,12 @@ export default function Postcard({
     await dispatch(createComment({ content: comment, post: post._id }));
     setcomment(" ");
     dispatch(getAllPosts());
-    React.useEffect(() => {
-      console.log(comments);
-    }, [comments]);
+   
   }
 
+   React.useEffect(() => {
+      console.log(comments);
+    }, [comments]);
 async function DelePost(){
   await dispatch(deletePost( post._id))
     await dispatch(getAllPosts());
@@ -119,7 +121,7 @@ async function DelePost(){
         )}
       </CardContent>
       <CardContent>
-        <Typography variant="body2" sx={{ color: "gray", paddingTop: "40px" }}>
+        <Typography  sx={{ color: "gray", paddingTop: "40px" }}>
           {post.body}
         </Typography>
       </CardContent>
@@ -223,8 +225,8 @@ async function DelePost(){
             id="id1"
             value={comment}
             onChange={(e) => setcomment(e.target.value)}
-            variant="plain"
-            size="sm"
+            // variant="plain"
+            // size="sm"
             placeholder="Add a comment…"
             sx={{ flex: 1, px: 0, "--Input-focusedThickness": "0px" }}
           />

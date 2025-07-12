@@ -6,16 +6,17 @@ import { useDispatch } from 'react-redux';
 import  { useEffect } from "react";
 import { storeDispatch } from '@/lib/Redux/store/store';
 import { Box, Stack } from '@mui/material';
-import Createpost from '@/app/_components/Createpost/Createpost';
 import Postcard from '@/app/_components/Navbar/postCard/postCard';
 import { Post } from '@/lib/interfaces/postInter';
-import Post, { deletePost, getAllPosts } from '@/lib/Redux/slices/postslice';
-export default function page() {
+import  { deletePost, getAllPosts } from '@/lib/Redux/slices/postslice';
+export default function Favourite() {
   const[FAV , setFAV]=useState<Post[]>([])
 
   useEffect(()=>{
-const storedFav=JSON.parse(localStorage.getItem("favourites"))||[]
-setFAV(storedFav)
+if (typeof window !== "undefined") {
+    const storedFav = JSON.parse(localStorage.getItem("favourites") || "[]");
+    setFAV(storedFav);
+  }
   },[])
      const dispatch = useDispatch<storeDispatch>();
 
@@ -33,7 +34,7 @@ const removeFav=(post:Post)=>{
 }
 
 //delete post 
-async function DelePost(){
+async function DelePost(post: Post){
   await dispatch(deletePost(post._id ))
     await dispatch(getAllPosts());
 }

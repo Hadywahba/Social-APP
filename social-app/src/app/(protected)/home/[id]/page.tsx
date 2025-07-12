@@ -8,23 +8,27 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'js-cookie' 
 import { userdata } from "@/lib/Redux/slices/userslice";
 import { Post } from "@/lib/interfaces/postInter";
-export default function id(props: any) {
-  //    console.log(props.params)
+import { useParams } from "next/navigation";
+export default  function Id() {
+  const { id } = useParams() as { id: string };
   const dispatch = useDispatch<storeDispatch>();
-  const { singlePost } = useSelector((c: storeState) => c.Post);
+  const { singlePost } = useSelector((c: storeState) => c.PostSl);
   const { comments } = useSelector((s: storeState) => s.commentSlice);
   const[favo,setfavo]=useState<Post[]>([])
 // favourite
 useEffect(()=>{
-const checkFav=JSON.parse(localStorage.getItem("favourites"))||[]
-setfavo(checkFav)
+if (typeof window !== "undefined") {
+    const checkFav = JSON.parse(localStorage.getItem("favourites") || "[]");
+  setfavo(checkFav)
+  }
+
 },[])
 
 const handleTogle=(post:Post)=>{
 const isFav=favo.some((favor)=>favor.id==post._id)
 let UpdateFav:Post[]=[]
 if(isFav){
-  UpdateFav=UpdateFav.filter(((favor)=>favor.id!==post._id))
+  UpdateFav=favo.filter(((favor)=>favor.id!==post._id))
 }else{
   UpdateFav=[...favo,post]
 }
@@ -35,12 +39,11 @@ localStorage.setItem("favourites", JSON.stringify(UpdateFav))
 // favourite
 
 // getSinglePosts
-  useEffect(() => {
-    props.params.then((data: any) => {
-       console.log(data.id)
-      dispatch(getSinglePosts(data.id));
-    });
-  }, [comments]);
+ useEffect(() => {
+    if (id) {
+      dispatch(getSinglePosts(id));
+    }
+  }, [comments,dispatch, id]);
 
 // getSinglePosts
 
@@ -49,14 +52,14 @@ localStorage.setItem("favourites", JSON.stringify(UpdateFav))
    if(Cookies.get("token")){
         dispatch((userdata()))
       }
- },[])
+ },[dispatch])
  // ShowUserData
 
  //delete post 
    async function DelePost(){
-     await dispatch(deletePost(post.id ))
+     await dispatch(deletePost(id ))
        await dispatch(getAllPosts());
-       await  dispatch(getSinglePosts(data.id));
+       await  dispatch(getSinglePosts(id));
    }
    //delete post 
 

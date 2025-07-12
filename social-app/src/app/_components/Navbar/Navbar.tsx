@@ -9,9 +9,6 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { Avatar, Button } from "@mui/material";
@@ -44,9 +41,7 @@ export default function Navbar() {
 
   const Token = Cookies.get("token");
 
-  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+ 
   const handleLogout = () => {
     Cookies.remove("token");
     router.push("/login");
