@@ -1,0 +1,46 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f0b8c6;
+}
+/* .bg-main{
+    position: absolute;
+   
+} */
+.b1{
+    text-decoration: none;
+    color: white;
+  padding-inline: 14px;
+  padding-block: 2px;
+  border-radius: 30px;
+  border: 2 solid white;
+  color: white;
+/* //                 py:2,
+//                borderRadius:"30px",
+//                 border: "2px solid white",
+//               color: "white",
+//               ":hover": { backgroundColor: "#EC486E" }, */
+}
+/* avatar-pic */
+@media (max-width: 640px) {
+   .avatar-pic{
+    display: flex;
+    flex-direction: column;
+   } 
+}
+/* appName */
+
+@media (max-width: 337px) {
+   .appName{
+    font-size: 1.1rem !important;
+   
+   } 
+}
+
+.MuiIconButton-root:hover {
+  background-color: transparent !important;
+}
+.MuiIconButton-root:focus {
+  background-color: transparent !important;
+}
