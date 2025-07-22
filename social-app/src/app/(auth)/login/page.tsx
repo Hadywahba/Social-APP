@@ -76,7 +76,7 @@ catch (error: unknown) {
             <Typography
               variant="h4"
               color="initial"
-              sx={{ color: "#EC486E", mb: 3, textAlign: "center" }}
+              sx={{ color: "#1E293B", mb: 3, textAlign: "center" }}
             >
               Login Now{" "}
             </Typography>
@@ -94,13 +94,13 @@ catch (error: unknown) {
               label="email"
               variant="outlined"
               sx={{
-                color: "#EC486E",
+                color: "#1E293B",
                 mb: 3,
-                "& .MuiInputLabel-root": { color: "#EC486E" },
-                "& .MuiInputLabel-root.Mui-focused": { Color: "#EC486E" },
+                "& .MuiInputLabel-root": { color: "#1E293B" },
+                "& .MuiInputLabel-root.Mui-focused": { Color: "#1E293B" },
                 "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": { borderColor: "#EC486E" },
-                  "&:hover fieldset": { borderColor: "#EC486E" },
+                  "&.Mui-focused fieldset": { borderColor: "#4F46E5" },
+                  "&:hover fieldset": { borderColor: "#4F46E5" },
                 },
               }}
             />
@@ -113,29 +113,29 @@ catch (error: unknown) {
               label="password"
               variant="outlined"
               sx={{
-                color: "#EC486E",
+                color: "#1E293B",
                 mb: 3,
-                "& label": { color: "#EC486E" },
-                "& label.Mui-focused": { Color: "#EC486E" },
+                "& label": { color: "#1E293B" },
+                "& label.Mui-focused": { Color: "#1E293B" },
 
                 "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": { borderColor: "#EC486E" },
-                  "&:hover fieldset": { borderColor: "#EC486E" },
+                  "&.Mui-focused fieldset": { borderColor: "#4F46E5" },
+                  "&:hover fieldset": { borderColor: "#4F46E5" },
                 },
               }}
             />
             {CallApi ? <Box component={"div"} sx={{width: "auto" , display:"flex" , justifyContent:"center"}}>
               <Box component={"div"} sx={{  borderRadius:"6px"}}>
-                <CircularProgress sx={{backgroundColorColor:"#EC486E" , color:"#EC486E"}} />
+                <CircularProgress sx={{backgroundColorColor:"#4F46E5" , color:"#1E293B"}} />
               </Box>
             </Box> :  <Button
               fullWidth
               type="submit"
             
               sx={{
-                border: "1px solid #EC486E",
-                color: "#EC486E",
-                ":hover": { backgroundColor: "#EC486E", color: "white" },
+                border: "1px solid #4F46E5",
+                color: "#1E293B",
+                ":hover": { backgroundColor: "#4F46E5", color: "white" },
               }}
             >
              {} submit

@@ -15,7 +15,6 @@ import { Avatar, Button } from "@mui/material";
 import { storeState } from "@/lib/Redux/store/store";
 import { useSelector } from "react-redux";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import NightlightIcon from '@mui/icons-material/Nightlight';
 import Link from "next/link";
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -53,6 +52,11 @@ export default function Navbar() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+   const handleLogin = ()=> {
+    router.push("/login");
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -70,21 +74,26 @@ export default function Navbar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-      sx={{ marginTop: 4 }}
+      sx={{ marginTop: 5 }}
     >
       {Token ? (
         [
-          <MenuItem key="account" onClick={handleMenuClose}>
-            My account
-          </MenuItem>,
+          // <MenuItem key="account" onClick={handleMenuClose}>
+          //   My account
+          // </MenuItem>,
           <MenuItem key="Logout" onClick={handleLogout}>
             Logout
           </MenuItem>,
         ]
       ) : (
+        [
         <MenuItem key="Register" onClick={handleRegister}>
           Register
+        </MenuItem>,
+        <MenuItem key="Login" onClick={handleLogin}>
+          Login
         </MenuItem>
+        ]
       )}
     </Menu>
   );
@@ -148,6 +157,7 @@ export default function Navbar() {
           </IconButton>
           <p>Register</p>
         </MenuItem>
+        
       )}
       
     </Menu>
@@ -156,7 +166,7 @@ export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar sx={{ backgroundColor: "#EC486E " }}>
+        <Toolbar sx={{ backgroundColor: "#1E293B " }}>
           <Button href="/home">
             <Typography
               className="appName"
@@ -190,11 +200,7 @@ export default function Navbar() {
                    </Link>
                     </Badge>
 
-                    <Badge>
-                   
-   <NightlightIcon  />
-                   
-                    </Badge>
+                    
                   </IconButton>,
                 ]
               : ""}

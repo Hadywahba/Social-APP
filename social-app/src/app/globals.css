@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f0b8c6;
+    background-color: #F3F4F6;
 }
 /* .bg-main{
     position: absolute;
@@ -33,7 +33,7 @@ body{
 
 @media (max-width: 337px) {
    .appName{
-    font-size: 1.1rem !important;
+    font-size: 1.5rem !important;
    
    } 
 }
@@ -43,4 +43,18 @@ body{
 }
 .MuiIconButton-root:focus {
   background-color: transparent !important;
+}
+
+@media (max-width: 900px) {
+  .regis {
+   display: none;
+  }
+}
+
+
+@media (min-width: 900px) {
+ 
+}
+.Gender{
+  color: #1E293B ;
 }

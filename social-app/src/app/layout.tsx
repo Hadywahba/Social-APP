@@ -4,7 +4,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Navbar from "./_components/Navbar/Navbar";
-
 import { Provider } from 'react-redux'
 import { store } from "@/lib/Redux/store/store";
 // import { store } from "./redux/store";

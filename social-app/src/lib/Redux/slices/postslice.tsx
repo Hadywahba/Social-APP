@@ -20,7 +20,7 @@ const initialState:PostsType ={
 }
 // getAllPosts //
  export const getAllPosts=createAsyncThunk('posts/getAllPosts' ,async ()=>{
- const{data}=await axios.get('https://linked-posts.routemisr.com/posts?limit=50&page=90',{
+ const{data}=await axios.get('https://linked-posts.routemisr.com/posts?limit=51&page=90',{
     headers:{
         token:Cookies.get("token")
     }

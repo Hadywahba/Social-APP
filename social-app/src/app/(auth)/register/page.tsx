@@ -77,7 +77,7 @@ export default function Register() {
         <Typography
           variant="h4"
           color="initial"
-          sx={{ color: "#EC486E", mb: 2, textAlign: "center" }}
+          sx={{ color: "#1E293B", mb: 2, textAlign: "center" }}
         >
           Create Account
         </Typography>
@@ -91,13 +91,13 @@ export default function Register() {
             label="name"
             variant="outlined"
             sx={{
-              color: "#EC486E",
+              color: "#1E293B",
               mb: 2,
-              "& .MuiInputLabel-root": { color: "#EC486E" },
-              "& .MuiInputLabel-root.Mui-focused": { Color: "#EC486E" },
+              "& .MuiInputLabel-root": { color: "#1E293B" },
+              "& .MuiInputLabel-root.Mui-focused": { Color: "#1E293B" },
               "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": { borderColor: "#EC486E" },
-                "&:hover fieldset": { borderColor: "#EC486E" },
+                "&.Mui-focused fieldset": { borderColor: "#4F46E5" },
+                "&:hover fieldset": { borderColor: "#4F46E5" },
               },
             }}
           />
@@ -110,13 +110,13 @@ export default function Register() {
             label="email"
             variant="outlined"
             sx={{
-              color: "#EC486E",
+              color: "#1E293B",
               mb: 2,
-              "& .MuiInputLabel-root": { color: "#EC486E" },
-              "& .MuiInputLabel-root.Mui-focused": { Color: "#EC486E" },
+              "& .MuiInputLabel-root": { color: "#1E293B" },
+              "& .MuiInputLabel-root.Mui-focused": { Color: "#1E293B" },
               "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": { borderColor: "#EC486E" },
-                "&:hover fieldset": { borderColor: "#EC486E" },
+                "&.Mui-focused fieldset": { borderColor: "#4F46E5" },
+                "&:hover fieldset": { borderColor: "#4F46E5" },
               },
             }}
           />
@@ -129,14 +129,14 @@ export default function Register() {
             name="password"
             variant="outlined"
             sx={{
-              color: "#EC486E",
+              color: "#1E293B",
               mb: 2,
-              "& label": { color: "#EC486E" },
-              "& label.Mui-focused": { Color: "#EC486E" },
+              "& label": { color: "#1E293B" },
+              "& label.Mui-focused": { Color: "#1E293B" },
 
               "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": { borderColor: "#EC486E" },
-                "&:hover fieldset": { borderColor: "#EC486E" },
+                "&.Mui-focused fieldset": { borderColor: "#4F46E5" },
+                "&:hover fieldset": { borderColor: "#4F46E5" },
               },
             }}
           />
@@ -149,14 +149,14 @@ export default function Register() {
             name="rePassword"
             variant="outlined"
             sx={{
-              color: "#EC486E",
+              color: "#1E293B",
               mb: 2,
-              "& label": { color: "#EC486E" },
-              "& label.Mui-focused": { Color: "#EC486E" },
+              "& label": { color: "#1E293B" },
+              "& label.Mui-focused": { Color: "#1E293B" },
 
               "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": { borderColor: "#EC486E" },
-                "&:hover fieldset": { borderColor: "#EC486E" },
+                "&.Mui-focused fieldset": { borderColor: "#4F46E5" },
+                "&:hover fieldset": { borderColor: "#4F46E5" },
               },
             }}
           />
@@ -169,35 +169,35 @@ export default function Register() {
             name="dateOfBirth"
             variant="outlined"
             sx={{
-              color: "#EC486E",
+              color: "#1E293B",
               mb: 2,
-              "& label": { color: "#EC486E" },
-              "& label.Mui-focused": { Color: "#EC486E" },
+              "& label": { color: "#1E293B" },
+              "& label.Mui-focused": { Color: "#1E293B" },
 
               "& .MuiOutlinedInput-root": {
-                "&.Mui-focused fieldset": { borderColor: "#EC486E" },
-                "&:hover fieldset": { borderColor: "#EC486E" },
+                "&.Mui-focused fieldset": { borderColor: "#4F46E5" },
+                "&:hover fieldset": { borderColor: "#4F46E5" },
               },
             }}
           />
           <Box sx={{ mb: 3, display: "flex", gap: "100px" }}>
-            <label>Gender Selection</label>
-            <select {...register("gender")}>
-              <option value="female">female</option>
+            <label color="#1E293B" className="Gender">Gender Selection</label>
+            <select {...register("gender")} color="#1E293B">
+              <option value="female" color="#1E293B">female</option>
               <option value="male">male</option>
             </select>
           </Box>
 {RegisterApi? <Box component={"div"} sx={{width: "auto" , display:"flex" , justifyContent:"center"}}>
               <Box component={"div"} sx={{  borderRadius:"6px"}}>
-                <CircularProgress sx={{backgroundColorColor:"#EC486E" , color:"#EC486E"}} />
+                <CircularProgress sx={{backgroundColorColor:"#4F46E5" , color:"#1E293B"}} />
               </Box>
             </Box>  : <Button
             fullWidth
             type="submit"
             sx={{
-              border: "1px solid #EC486E",
-              color: "#EC486E",
-              ":hover": { backgroundColor: "#EC486E", color: "white" },
+              border: "1px solid #4F46E5",
+              color: "#4F46E5",
+              ":hover": { backgroundColor: "#4F46E5", color: "white" },
             }}
           >
             submit
@@ -209,6 +209,7 @@ export default function Register() {
         </form>
       </Paper>
       <Paper
+      className="regis"
         elevation={3}
         sx={{
           px:{md:4 } ,
@@ -216,9 +217,9 @@ export default function Register() {
           position: "relative",
           width: "100%",
           height: { xs: 250, sm: 300, md: "auto" },
-          backgroundColor: "#EC486E",
+          backgroundColor: "#FFFFFF",
           color: "white",
-          // ":hover": { backgroundColor: "#C300FD" },
+          ":hover": { backgroundColor: "" ,  },
           cursor: "pointer",
         }}
       >
@@ -233,7 +234,7 @@ export default function Register() {
             height: "100%",
           }}
         >
-          <Typography variant="h3" color="white" sx={ { fontSize:{ xs:25 , sm:40 , md:40 }}}>
+          <Typography variant="h3"  sx={ { fontSize:{ xs:25 , sm:40 , md:40 } , color:"#1E293B"}}>
             Welcome Back!
           </Typography>
           <Typography
@@ -243,7 +244,8 @@ export default function Register() {
               textDecorationStyle: "solid",
               textAlign: "center",
               lineHeight: 2,
-              fontSize:{ xs:16 , sm:20 , lg:25}
+              fontSize:{ xs:16 , sm:20 , lg:25} ,
+              color:"#1E293B"
             }}
           >
             To keep connected with us please
@@ -258,9 +260,10 @@ export default function Register() {
               px: {xs:8 ,sm:10 ,md:14  },
               py: 2,
               borderRadius: "30px",
-              border: "2px solid white",
-              color: "white",
-              ":hover": { backgroundColor: "white" , color:"#EC486E" },
+              border: "2px solid #4F46E5",
+              color: "#FFFFFF",
+              bgcolor:"#4F46E5",
+              ":hover": { backgroundColor: "#FFFFFF" , color:"#4F46E5" },
             }}
           >
             login

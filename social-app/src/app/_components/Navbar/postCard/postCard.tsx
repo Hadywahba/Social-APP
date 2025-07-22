@@ -7,7 +7,7 @@ import CardContent from "@mui/joy/CardContent";
 import Link from "@mui/joy/Link";
 import IconButton from "@mui/joy/IconButton";
 import Typography from "@mui/joy/Typography";
-import MoreHoriz from "@mui/icons-material/MoreHoriz";
+// import MoreHoriz from "@mui/icons-material/MoreHoriz";
 import ModeCommentOutlined from "@mui/icons-material/ModeCommentOutlined";
 import SendOutlined from "@mui/icons-material/SendOutlined";
 import { Button, CardMedia, Input } from "@mui/material";
@@ -29,11 +29,13 @@ export default function Postcard({
   
 }: {
   post: Post;
+
   limitComment?: number;
   favourites: { id: string }[];
   handleTogle: (Post: Post) => void;
-   isfavourite?: boolean;
-    DelePost?: (post: Post) => Promise<void>;
+
+  isfavourite?: boolean;
+  DelePost?: (post: Post) => Promise<void>;
 }) {
   const [comment, setcomment] = React.useState("");
   const [comm, setcomm] = React.useState(false);
@@ -46,16 +48,21 @@ export default function Postcard({
     await dispatch(createComment({ content: comment, post: post._id }));
     setcomment(" ");
     dispatch(getAllPosts());
-   
   }
 
-   React.useEffect(() => {
-      console.log(comments);
-    }, [comments]);
-async function DelePost(){
-  await dispatch(deletePost( post._id))
+  React.useEffect(() => {
+    console.log(comments);
+  }, [comments]);
+  //deletepost
+  async function DelePost() {
+    await dispatch(deletePost(post._id));
     await dispatch(getAllPosts());
-}
+  }
+  //deletepost
+  //
+  //deletecomment
+
+  //deletecomment
 
   function addCom() {
     setcomm(!comm);
@@ -121,7 +128,7 @@ async function DelePost(){
         )}
       </CardContent>
       <CardContent>
-        <Typography  sx={{ color: "gray", paddingTop: "40px" }}>
+        <Typography sx={{ color: "gray", paddingTop: "40px" }}>
           {post.body}
         </Typography>
       </CardContent>
@@ -196,14 +203,18 @@ async function DelePost(){
               {comment.content}
             </Typography>
           </Box>
-          <IconButton
-            variant="plain"
-            color="neutral"
-            size="sm"
-            sx={{ ml: "auto" }}
-          >
-            <MoreHoriz />
-          </IconButton>
+          {userPostID == comment._id ? (
+            <IconButton
+              variant="plain"
+              color="neutral"
+              size="sm"
+              sx={{ ml: "auto" }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          ) : (
+            ""
+          )}
         </CardContent>
       ))}
 

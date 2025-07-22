@@ -10,9 +10,11 @@ import { Post } from "@/lib/interfaces/postInter";
 import Createpost from "@/app/_components/Createpost/Createpost";
 import { userdata } from "@/lib/Redux/slices/userslice";
 
+
 export default function Home() {
   const dispatch = useDispatch<storeDispatch>();
   const { posts } = useSelector((c: storeState) => c.PostSl);
+
   const [favourites, setfavourites] = useState<Post[]>([]);
   // favourite
   const handleTogle = (post: Post) => {
@@ -27,6 +29,7 @@ export default function Home() {
     localStorage.setItem("favourites", JSON.stringify(updateFav));
   };
   // favourite
+ 
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -57,6 +60,7 @@ export default function Home() {
             post={post}
             favourites={favourites}
             handleTogle={handleTogle}
+         
           />
         ))}
       </Stack>

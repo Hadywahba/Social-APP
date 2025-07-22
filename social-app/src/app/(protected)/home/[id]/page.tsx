@@ -9,6 +9,7 @@ import Cookies from 'js-cookie'
 import { userdata } from "@/lib/Redux/slices/userslice";
 import { Post } from "@/lib/interfaces/postInter";
 import { useParams } from "next/navigation";
+
 export default  function Id() {
   const { id } = useParams() as { id: string };
   const dispatch = useDispatch<storeDispatch>();
@@ -63,13 +64,15 @@ localStorage.setItem("favourites", JSON.stringify(UpdateFav))
    }
    //delete post 
 
+    
+
   return (
     <>
       <Stack
         spacing={2}
         sx={{ maxWidth: "1000px", paddingInline: 4, margin: "2rem auto" }}
       >
-        {singlePost && <Postcard post={singlePost}  favourites={favo} handleTogle={handleTogle} DelePost={DelePost}    />}
+        {singlePost && <Postcard post={singlePost}   favourites={favo} handleTogle={handleTogle} DelePost={DelePost}    />}
       
       </Stack>
     </>
